@@ -1,9 +1,8 @@
 # singleton
 
-TODO: Write a description here
+Singleton library for Crystal. Created out of necessity to work around the problem with class variables inside of generic classes.
 
 ## Installation
-
 
 Add this to your application's `shard.yml`:
 
@@ -13,20 +12,35 @@ dependencies:
     github: waterlink/singleton.cr
 ```
 
-
 ## Usage
-
 
 ```crystal
 require "singleton"
 ```
 
+### Fetching instance of certain type
 
-TODO: Write usage instructions here
+```crystal
+Singleton.instance_of(Example)
+```
 
-## Development
+This uses `Example.new` to produce the instance.
 
-TODO: Write development instructions here
+Making singleton out of `Example(T)` class now would look like that:
+
+```crystal
+class Example(T)
+  def self.instance
+    Singleton.instance_of(self)
+  end
+end
+```
+
+### Resetting all singletons (in tests)
+
+```crystal
+Singleton.reset
+```
 
 ## Contributing
 
