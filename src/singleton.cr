@@ -19,6 +19,6 @@ class Singleton
       @@instances[t.name] = GenericProducer(T).new(t.new)
     end
 
-    @@instances[t.name].produce as T
+    @@instances[t.name].produce.as(T)
   end
 end
