@@ -21,7 +21,7 @@ require "singleton"
 ### Fetching instance of certain type
 
 ```crystal
-Singleton.instance_of(Example)
+Singleton::Of(Example).instance
 ```
 
 This uses `Example.new` to produce the instance.
@@ -31,7 +31,7 @@ Making singleton out of `Example(T)` class now would look like that:
 ```crystal
 class Example(T)
   def self.instance
-    Singleton.instance_of(self)
+    Singleton::Of(self).instance
   end
 end
 ```

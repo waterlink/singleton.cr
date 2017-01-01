@@ -14,11 +14,17 @@ class Singleton
     @@instances.clear
   end
 
-  def self.instance_of(t : T.class) : T
-    unless @@instances.has_key?(t.name)
-      @@instances[t.name] = GenericProducer(T).new(t.new)
-    end
+  def self.instances
+    @@instances
+  end
 
-    @@instances[t.name].produce.as(T)
+  class Of(T)
+    def self.instance : T
+      unless Singleton.instances.has_key?(T.name)
+        Singleton.instances[T.name] = GenericProducer(T).new(T.new)
+      end
+
+      Singleton.instances[T.name].produce.as(T)
+    end
   end
 end
